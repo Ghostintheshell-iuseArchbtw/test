@@ -1,29 +1,34 @@
 import subprocess
-import module1
-import module2
+import subprocess
+import sys
+import deadman_switch
+import DdosAttack.py
+
+sys.path.append("/workspaces/test/deadman_switch.py")
+
+
 
 class DefenseFramework:
     def __init__(self):
         # Initialize the framework with necessary components
         self.honeypots = []
-        self.firewall_rules = []
         self.ids_rules = []
         self.backup_plan = None
 
-    def build_honeypots(self):
-        # Build the honey pots that will link to the attacker's IP address and port
-        honeypot1 = Honeypot("192.168.0.100", 8080)
-        honeypot2 = Honeypot("192.168.0.101", 8080)
-        self.honeypots = [honeypot1, honeypot2]
-
-    def build_firewall(self):
-        # Build the firewall that will block the attacker's IP address
-        firewall_rule = FirewallRule("192.168.0.102", "BLOCK")
-        self.firewall_rules.append(firewall_rule)
+    class Defense:
+        def build_honeypots(self):
+            """
+            Build the honey pots that will link to the attacker's IP address and port.
+            """
+            localhost = "127.0.0.1"  # Definition of localhost
+            honeypot1 = Honeypot(localhost, 4040)
+            honeypot2 = Honeypot(localhost, 8080)
+            self.honeypots = [honeypot1, honeypot2]
 
     def build_ids(self):
         # Build the IDS that will detect and block the attacker's IP address
-        ids_rule = IDSRule("192.168.0.103", "BLOCK")
+        localhost = "127.0.0.1"  # Definition of localhost
+        ids_rule = IDSRule(localhost, "BLOCK")
         self.ids_rules.append(ids_rule)
 
     def build_backup_plan(self):
@@ -37,11 +42,11 @@ class DefenseFramework:
 
     def import_modules(self):
         # Import the necessary modules
+        print("Importing modules...")
 
     def run(self):
         # Run the defense framework by calling the necessary methods
         self.build_honeypots()
-        self.build_firewall()
         self.build_ids()
         self.build_backup_plan()
         self.import_modules()
@@ -51,11 +56,6 @@ class Honeypot:
     def __init__(self, ip_address, port):
         self.ip_address = ip_address
         self.port = port
-
-class FirewallRule:
-    def __init__(self, ip_address, action):
-        self.ip_address = ip_address
-        self.action = action
 
 class IDSRule:
     def __init__(self, ip_address, action):
@@ -68,11 +68,11 @@ class BackupPlan:
 
     def ddos_attacker(self):
         # Implement DDoS attack on the attacker's IP address using the honeypots
-        pass
+        print("Performing DDoS attack...")
 
     def restore_system(self):
         # Implement system restoration after the attack
-        pass
+        print("Restoring system...")
 
     def execute(self):
         self.ddos_attacker()
@@ -81,4 +81,3 @@ class BackupPlan:
 # Create an instance of the DefenseFramework class and run the framework
 defense_framework = DefenseFramework()
 defense_framework.run()
-
