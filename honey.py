@@ -8,6 +8,17 @@ class SSH_Server:
         return paramiko.AUTH_FAILED
 
 def handle_connection(client_sock, server_key):
+    """
+    Handles a client connection by adding the server key, starting the SSH server,
+    binding the server socket, generating a server key, and accepting client connections.
+
+    Args:
+        client_sock (socket.socket): The client socket object.
+        server_key (paramiko.RSAKey): The server key object.
+
+    Returns:
+        None
+    """
     transport.add_server_key(server_key)
     ssh = SSH_Server()
     transport.start_server(server=ssh)
@@ -30,6 +41,7 @@ def main(honey_ip, honey_port):
 
 if __name__ == '__main__':
     honey_ip = '0.0.0.0'  # Replace with the actual IP address
-    honey_port = 2222  # Replace with the actual port number
+    honey_port = 22  # Replace with the actual port number
     main(honey_ip, honey_port)
+    
    
